@@ -1,0 +1,29 @@
+server:
+  port: 9095
+  error:
+    include-message: ALWAYS
+management.endpoints.web.exposure.include: "*"
+spring:
+  main:
+    banner-mode: OFF
+  output:
+    ansi:
+      enabled: ALWAYS
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  sql.init.mode: ALWAYS
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    defer-datasource-initialization: true
+  h2.console:
+    enabled: true
+    settings:
+      web-allow-others: false
+      trace: false
+
