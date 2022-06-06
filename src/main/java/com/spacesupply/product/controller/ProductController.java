@@ -25,7 +25,8 @@ public class ProductController {
         String port = env.getProperty("server.port");
         String title = "<h1>This is the Product Microservice</h1>";
         String text = "<p>You have access to the following mappings using <i>localhost:"+port+"/products</i></p>";
-        String[] mappings = new String[]{"status", "all", "id/{id}", "name/{name}", "count", "create", "update"};
+        String[] mappings = new String[]{"status", "all", "id/{id}", "name/{name}",
+                "count", "create", "update/{id}", "delete/{id}"};
         String mappingItems = Arrays.stream(mappings)
                 .map(mapping -> "<li>/"+mapping+"</li>")
                 .collect(Collectors.joining());
@@ -69,6 +70,11 @@ public class ProductController {
     @PutMapping("/update/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product product){
         return productService.updateProduct(id, product);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteProduct(@PathVariable Long id) {
+        return productService.deleteProduct(id);
     }
 
 }

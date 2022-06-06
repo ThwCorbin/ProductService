@@ -63,4 +63,16 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
+    @Override
+    public String deleteProduct(Long id) {
+        Product currentProduct = repository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        String name = currentProduct.getName();
+
+        repository.delete(currentProduct);
+
+        return String.format("Product with id %d and name %s is no longer available",
+                id, name);
+    }
+
 }
