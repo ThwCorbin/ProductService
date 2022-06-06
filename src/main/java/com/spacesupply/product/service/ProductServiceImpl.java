@@ -4,6 +4,7 @@ import com.spacesupply.product.model.Product;
 import com.spacesupply.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -33,5 +34,18 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public long getCount() {
         return repository.count();
+    }
+
+    @Override
+    public ResponseEntity<Object> createProduct(Product product) {
+        Product newProduct;
+        try{
+            newProduct = repository.save(product);
+        }
+        catch(Exception ex) {
+            String message = ex.getCause().getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(newProduct, HttpStatus.CREATED);
     }
 }
