@@ -48,4 +48,19 @@ public class ProductServiceImpl implements ProductService {
         }
         return new ResponseEntity<>(newProduct, HttpStatus.CREATED);
     }
+
+    @Override
+    public ResponseEntity<Product> updateProduct(Long id, Product product){
+        Product currentProduct = repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        currentProduct.setName(product.getName());
+        currentProduct.setPrice(product.getPrice());
+        currentProduct.setQuantity(product.getQuantity());
+
+        final Product updatedProduct = repository.save(currentProduct);
+
+        return ResponseEntity.ok(updatedProduct);
+
+    }
+
 }

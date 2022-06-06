@@ -15,4 +15,5 @@ public interface ProductService {
     List<Product> getByName(String name);
     long getCount();
     ResponseEntity<Object> createProduct(@RequestBody Product product);
+    ResponseEntity<Product> updateProduct(Long id, @RequestBody Product product);
 }
