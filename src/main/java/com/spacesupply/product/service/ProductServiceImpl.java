@@ -29,4 +29,9 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getByName(String name) {
         return repository.findByNameIgnoreCase(name);
     }
+
+    @Override
+    public long getCount() {
+        return repository.count();
+    }
 }
