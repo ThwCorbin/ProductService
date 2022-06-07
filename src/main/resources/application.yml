@@ -1,5 +1,5 @@
 server:
-  port: 0
+  port: 9095
   error:
     include-message: ALWAYS
 management.endpoints.web.exposure.include: "*"
